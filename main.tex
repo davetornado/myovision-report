@@ -1,0 +1,146 @@
+\documentclass[12pt]{article}
+
+%PACKAGES
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{alltt}
+\usepackage{mathtools}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage[a4paper, width = 160mm, top = 35mm, bottom = 30mm, 
+bindingoffset = 0mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage[
+backend=biber,
+url=false,
+citestyle=nature]{biblatex}
+\addbibresource{bibliography.bib}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = black,
+	urlcolor = black,
+	citecolor = black}
+
+%TITLE PARAMS
+\newcommand{\mytitle}{Segmentation of Myotubes and Myoblasts}
+\newcommand{\myname}{Giorgi Nozadze, Moustafa Amin, David Gorbunov}
+\newcommand{\mysupervisor}{Prof. Dr. David Rügamer, Tobias Weber}
+\newcommand{\mypartner}{Dr. Maximilian Saller}
+
+\newcommand{\changefont}{%
+	\fontsize{8}{11}\selectfont
+}
+
+%COMMANDS
+\newcommand{\realsn}{\mathbb{R}^{\!\textit{n}}}
+\newcommand{\with}{\qquad \text{with} \quad}
+\newcommand{\integ}[2][]{\int_{#1}\mathrm{d}#2\,}
+\newcommand{\reals}[1]{\mathbb{R}^{\!\textit{#1}}}
+\newcommand{\identity}{\mathds{1}}
+\newcommand{\expval}[2][p]{\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\argmin}[2]{\underset{#1}{\mathrm{argmin}}\left(#2\right)}
+\newcommand{\argmax}[2]{\underset{#1}{\mathrm{argmax}}\left(#2\right)}
+\newcommand{\var}[2][p]{\text{Var}_{#1}\left[#2\right]}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\changefont{\mytitle}}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{14.5pt}
+\setlength{\parindent}{0pt}
+\interfootnotelinepenalty = 10000
+
+% ------------------------------------------------------------------------------
+% MAIN -------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\begin{document}
+	
+	% FRONT PAGE -------------------------------------------------------------------
+	
+	\begin{titlepage}
+		\begin{center}
+			
+			\LARGE
+			Statistical Consulting
+			
+			\vspace{0.5cm}
+			
+			\rule{\textwidth}{1.5pt}
+			\LARGE
+			\textbf{\mytitle}
+			\rule{\textwidth}{1.5pt}
+			
+			\vspace{0.5cm}
+			
+			\large
+			Department of Statistics \\
+			Ludwig-Maximilians-Universität München 
+			
+			\vfill
+			
+			\Large
+			\textbf{\myname}
+			
+			\vfill
+			
+			\large
+			Munich, January 30\textsuperscript{th}, 2024
+			
+			\vfill
+			
+			\includegraphics[width = 0.4\textwidth]{sigillum.png}
+			
+			\vfill
+			
+			\normalsize
+			
+			Supervisors: \mysupervisor
+			
+			\vfill
+			
+			Project Partner: \mypartner
+			
+		\end{center}
+	\end{titlepage}
+ 	\pagenumbering{gobble}
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	\include{abstract}
+	%\newpage
+	\include{intro}
+	%\newpage
+	\include{unsupervised}
+	%\newpage
+	\include{stardist}
+	%\newpage
+	\include{myosam}
+	%\newpage
+	\include{results}
+	%\newpage
+	\include{conclusion}
+	\newpage
+	\pagenumbering{gobble}
+	\printbibliography
+	\appendix
+	\cleardoublepage
+	\include{appendix}
+\end{document}
