@@ -2,6 +2,7 @@
 
 %PACKAGES
 \usepackage[]{graphicx}
+\usepackage[english,ngerman]{babel}
 \usepackage[]{color}
 \usepackage{alltt}
 \usepackage{mathtools}
@@ -19,9 +20,11 @@ bindingoffset = 0mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{ragged2e}
 \usepackage{xcolor}
-\usepackage[ruled,vlined]{algorithm2e}
+%\usepackage[ruled,vlined]{algorithm2e}
 \usepackage{fancyhdr}
 \usepackage{mathrsfs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage[
 backend=biber,
 url=false,
@@ -46,6 +49,8 @@ citestyle=nature]{biblatex}
 
 %COMMANDS
 \newcommand{\realsn}{\mathbb{R}^{\!\textit{n}}}
+\newcommand{\stardist}{\texttt{StarDist}}
+\newcommand{\sam}{\texttt{SAM}}
 \newcommand{\with}{\qquad \text{with} \quad}
 \newcommand{\integ}[2][]{\int_{#1}\mathrm{d}#2\,}
 \newcommand{\reals}[1]{\mathbb{R}^{\!\textit{#1}}}
@@ -101,7 +106,7 @@ citestyle=nature]{biblatex}
 			\vfill
 			
 			\large
-			Munich, January 30\textsuperscript{th}, 2024
+			Munich, February 28\textsuperscript{th}, 2024
 			
 			\vfill
 			
@@ -110,32 +115,39 @@ citestyle=nature]{biblatex}
 			\vfill
 			
 			\normalsize
-			
+			By: \myname			
+		
 			Supervisors: \mysupervisor
-			
-			\vfill
-			
+						
 			Project Partner: \mypartner
+
+			\vfill
+
+			
 			
 		\end{center}
 	\end{titlepage}
  	\pagenumbering{gobble}
  	\include{abstract}
+ 	\listoffigures
+ 	\clearpage
 	\tableofcontents
 	\newpage
 	\pagenumbering{arabic}
 	\setcounter{page}{1}
-	%\newpage
+	\newpage
 	\include{intro}
-	%\newpage
+	\newpage
 	\include{unsupervised}
-	%\newpage
+	\newpage
 	\include{stardist}
-	%\newpage
+	\newpage
 	\include{myosam}
-	%\newpage
+	\newpage
+	\include{dataset}
+	\newpage
 	\include{results}
-	%\newpage
+	\newpage
 	\include{conclusion}
 	\newpage
 	\pagenumbering{gobble}
