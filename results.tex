@@ -1,3 +1,122 @@
-\section{Performance Evaluation}
-\subsection{Myoblasts}
-\subsection{Myotubes}
+\section{Performance Evaluation and Metrics}
+Evaluating the performance of computer vision tasks is far from trivial. They are typically categorized into four areas: image classification, object detection, semantic segmentation, and instance segmentation, each with distinct objectives. As a result, the performance metrics applicable to one category may not be suitable for another. Moreover, each segmentation task has unique requirements and deals with different types of images, which influences the relevance of performance metrics. In our work, we focus on binary instance segmentation for both myotube and cell nuclei images. Given the distinct characteristics of these image types, we selected a set of performance metrics that we believe most accurately reflect our model's performance.
+Instance segmentation tasks fundamentally involve classification, where metrics gauge a model's ability to differentiate between categories using counts of true positives, false positives, and false negatives. In binary instance segmentation, true negatives, which would correspond to the image background, are not considered. We assess our models' detection quality through metrics like precision (the rate at which predicted instances are correctly classified), recall (the ability to identify all relevant instances), and accuracy (the average of precision and recall). We also employ overlap-based metrics to compare predictions with ground truths in images and to gauge our models' segmentation quality. Metrics such as Intersection over Union (IoU), Intersection over Reference (IoR), and Normalized Surface Distance (NSD) are used, depending on the image type. These metrics are calculated for matched true positive and ground truth instances and reported both before and after normalization by the number of ground truth masks. Additionally, we report Panoptic Quality, a hybrid metric that combines segmentation and detection quality into one, yielding more conservative results due to its basis on measures ranging from 0 to 1.
+
+\textcolor{red}{(METRICS SUMMARY TABLE)}
+
+In the following two subsections, we present these metrics for Stardist, used to segment cell nuclei, and MyoSAM, our model for myotube segmentation. We also compare the performance of MyoSAM to Meta’s SAM model for direct comparison.
+\subsection{Performance Evaluation}
+\subsubsection{Performance of Myoblast Segmentation with Stardist}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/qualitative_performance_stardist.png"}
+	\caption[Qualitative performance \texttt{Stardist}]{\textcolor{red}{tbd}.}
+	\label{figperfstardistqual}
+\end{figure} 
+
+Qualitatively, Stardist effectively segments cell nuclei, closely matching the shapes of manually annotated reference masks. Despite its generally precise segmentation, Stardist tends to slightly underestimate the number of nuclei in densely clustered areas. This observation is supported by the difference in the number of reference masks (n=1923) compared to predicted masks (n=1823). To quantify this performance, we matched predictions with references using the Intersection over Reference metric, allowing less penalization for predictions that segment multiple references and accommodating single predictions to multiple references. Double assignments in matching are considered false positives.
+The common threshold for mask matching in computer vision is 0.5, but this may be too conservative for small objects like cell nuclei, where minimal prediction shifts can significantly impact overlap metrics. Despite this, Stardist's performance remains robust even at conservative thresholds.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/quantitative_performance_stardist.png"}
+	\caption[Quantitative performance \texttt{Stardist}]{\textcolor{red}{tbd}.}
+	\label{figperfstardist}
+\end{figure} 
+
+
+\subsubsection{Performance of Myotube Segmentation with MyoSAM}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/qualitative_performance_myosam.png"}
+	\caption[Qualitative performance \texttt{MyoSAM}]{\textcolor{red}{tbd}.}
+	\label{figperfsamqual}
+\end{figure} 
+The performance comparison between MyoSAM and the standard SAM model highlights several key differences. Our focus with MyoSAM was on accurately delineating myotube boundaries, crucial for medical evaluations of microscopy images. To this end, we report the Normalized Surface Distance as an overlap metric for myotubes, which is a measure of overlap of the mask boundaries. NSD has an adjustable parameter tau, with which the boundaries of both masks can be widened to account for inter rater variability. We set the parameter at three, meaning the boundaries were widened by three pixels both inward and outward.
+Despite SAM's capabilities, it faces challenges in accurately segmenting overlapping myotubes, often misidentifying them as separate entities or as disconnected parts of the same segment. Its design to segment a wide range of features results in the unnecessary segmentation of insignificant details, such as minor grains or shades within myotubes. Additionally, SAM sometimes generates redundant masks for a single myotube, a byproduct of its training to handle ambiguous prompts, despite there being no such ambiguity in myotube identification. This highlights the need for tailored approaches in myotube segmentation to avoid these specific issues. Our qualitative comparison shows MyoSAM significantly improves on these issues, but how do the metrics reflect this? We matched myotube references and predictions using IoU, and we’d recommend a 0.5 matching threshold due to the larger size of myotubes compared to nuclei. MyoSAM outperforms SAM in almost all aspects and at all except one matching threshold, except for a slight increase in the number of predicted masks, demonstrating a quality over quantity advantage.
+
+\textcolor{red}{(INSERT TABLE WITH PERFORMANCE AT 0.5)}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/quantitative_performance_myosam.png"}
+	\caption[Quantitative performance \texttt{MyoSAM}]{\textcolor{red}{tbd}.}
+	\label{figperfsam}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/quantitative_performance_sam.png"}
+	\caption[Quantitative performance \texttt{SAM}]{\textcolor{red}{tbd}.}
+	\label{figperfsambase}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/diff_quantitative_performance_myosam_sam.png"}
+	\caption[Difference quantitative performance \texttt{SAM}\texttt{MyoSAM}]{\textcolor{red}{tbd}.}
+	\label{figperfdiffsam}
+\end{figure} 
+
+\textcolor{red}{cite Metrics Reloaded, ref figs}
+
+\subsection{Myovision Metrics}
+Our research involves segmenting microscopic myotubes and cell nuclei, a process crucial for musculoskeletal researchers and medical practitioners. This segmentation allows for detailed analysis and understanding of myotubes and cell nuclei, providing valuable insights into muscular health and diseases. To support this analysis, our tool has been developed to offer a wide range of metrics in real-time to facilitate speedy examination with no human error. We offer a total of 31 metrics, divided into image-specific and myotube-specific categories, as detailed in our Myovision metrics table.
+\begin{table}[htbp]
+	\centering
+	\caption{Image and Myotube Specific Metrics}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Image Specific Metrics} & \textbf{Myotube Specific Metrics} \\
+		\hline
+		\begin{minipage}[t]{0.45\linewidth}
+			\begin{itemize}[nosep,leftmargin=*]
+				\item Total myotubes
+				\item Total nuclei
+				\item Total myoblasts
+				\item Total nuclei inside myotubes
+				\item Total fusion index (formula)
+				\item Number of nuclei clusters
+				\item Total myotube area
+				\item Total nuclei area
+				\item Total myoblasts area
+				\item Total nuclei inside myotubes area
+			\end{itemize}
+		\end{minipage} &
+		\begin{minipage}[t]{0.45\linewidth}
+			\begin{itemize}[nosep,leftmargin=*]
+				\item Predicted IoU
+				\item Stability
+				\item Is on edge
+				\item RGB min
+				\item RGB max
+				\item RGB mean
+				\item RGB median
+				\item RGB mode
+				\item RGB standard deviation
+				\item Integrated density RGB
+				\item Area
+				\item Convex area
+				\item Solidity (formula)
+				\item Aspect ratio (formula)
+				\item Roundness (formula)
+				\item Perimeter
+				\item Feret’s Diameter (min \& max)
+				\item Circularity (formula)
+				\item Instance fusion index
+				\item Centroid
+				\item Cluster information
+			\end{itemize}
+		\end{minipage} \\
+		\hline
+	\end{tabular}
+	\label{tab:metrics}
+\end{table}
+\subsubsection{Image Specific Metrics}
+These metrics primarily count the instances of various musculoskeletal components within an image. Myoblasts are defined as nuclei not contained within a myotube. A nucleus is considered part of a myotube if 95\% or more of its area is inside the myotube. This determination involves a multi-step process, starting with identifying if nuclei centroids are within a myotube's bounding box, then verifying if their centroids are within the myotube's perimeter. We further refine this by converting the relevant myotubes and nuclei into a binary mask to check the percentage of a nucleus's area inside a myotube. However, the masks we create correspond to the size of the myotube’s bounding box instead of the whole image thus optimizing memory usage. Clusters of nuclei within the same myotube are identified by detecting overlaps and creating a graph where nuclei are nodes connected by their overlaps. The number of nodes in this graph represents the number of nuclei in a cluster. Area measurements for myotubes, nuclei, and myoblasts are obtained by counting the pixels within each entity, allowing for conversion to metric scale measurements if the pixel size in the microscopic image is known.
+\subsubsection{Myotube Specific Metrics}
+These metrics include the predicted Intersection over Union (IoU) and Stability, both built in SAM metrics. Predicted IoU measures the predicted overlap between predicted and reference masks, while Stability assesses the sensitivity of predicted masks to changes in prompts. Pixel activation metrics (such as RGB min, max, mean, median, mode, and standard deviation) provide colour intensity information across three channels. The integrated RGB density metric sums the pixel intensities for each colour channel. Shape descriptors like Area, Convex Area, Solidity, Aspect Ratio, Roundness, Perimeter, Feret’s Diameter, and Circularity offer detailed insights into each myotube's physical characteristics. For example, Convex Area is calculated from the area enclosed by the convex hull of a myotube, while Solidity and Roundness measure convexity and circularity, respectively. Feret's Diameter, both minimum and maximum, are derived from linear projections of myotubes using their eigenvectors, measuring their diameter in the directions of minimum and maximum variance. The Instance Fusion Index quantifies the number of nuclei within a specific myotube. Lastly, each myotube is accompanied by cluster information, detailing the number of clusters within a myotube and the number of nuclei in each cluster, along with their indicators.
+This comprehensive suite of metrics provided by our MyoSAM tool is designed to facilitate a deeper understanding and analysis of myotubes and their cellular components, offering a robust framework for musculoskeletal research and medical diagnostics.
+\textcolor{red}{todo: add formulas in table, change font of SAM and Stardist}
+
+
