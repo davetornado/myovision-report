@@ -3,26 +3,25 @@ Evaluating the performance of computer vision tasks is far from trivial. They ar
 Instance segmentation tasks fundamentally involve classification, where metrics gauge a model's ability to differentiate between categories using counts of true positives, false positives, and false negatives. In binary instance segmentation, true negatives, which would correspond to the image background, are not considered. We assess our models' detection quality through metrics like precision (the rate at which predicted instances are correctly classified), recall (the ability to identify all relevant instances), and accuracy (the average of precision and recall). We also employ overlap-based metrics to compare predictions with ground truths in images and to gauge our models' segmentation quality. Metrics such as Intersection over Union (IoU), Intersection over Reference (IoR), and Normalized Surface Distance (NSD) are used, depending on the image type. These metrics are calculated for matched true positive and ground truth instances and reported both before and after normalization by the number of ground truth masks. Additionally, we report Panoptic Quality, a hybrid metric that combines segmentation and detection quality into one, yielding more conservative results due to its basis on measures ranging from 0 to 1.
 
 \textcolor{red}{(METRICS SUMMARY TABLE)}
-
-In the following two subsections, we present these metrics for Stardist, used to segment cell nuclei, and \texttt{MyoSAM}, our model for myotube segmentation. We also compare the performance of \texttt{MyoSAM} to Meta’s \texttt{SAM} model for direct comparison.
 \subsection{Performance Evaluation}
+In the following two subsections, we present these metrics for Stardist, used to segment cell nuclei, and \texttt{MyoSAM}, our model for myotube segmentation. We also compare the performance of \texttt{MyoSAM} to Meta’s \texttt{SAM} model for direct comparison.
 \subsubsection{Performance of Myoblast Segmentation with Stardist}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/qualitative_performance_stardist.png"}
-	\caption[Qualitative performance \texttt{Stardist}]{\textcolor{red}{tbd}.}
+	\caption[Qualitative performance \texttt{Stardist}]{Comparison of one sample image and one patch therein in terms of ground truth and \texttt{Stardist} prediction.}
 	\label{figperfstardistqual}
 \end{figure} 
 
-Qualitatively, Stardist effectively segments cell nuclei, closely matching the shapes of manually annotated reference masks. Despite its generally precise segmentation, Stardist tends to slightly underestimate the number of nuclei in densely clustered areas. This observation is supported by the difference in the number of reference masks (n=1923) compared to predicted masks ($n=1823$). To quantify this performance, we matched predictions with references using the Intersection over Reference metric, allowing less penalization for predictions that segment multiple references and accommodating single predictions to multiple references. Double assignments in matching are considered false positives.
-The common threshold for mask matching in computer vision is 0.5, but this may be too conservative for small objects like cell nuclei, where minimal prediction shifts can significantly impact overlap metrics. Despite this, Stardist's performance remains robust even at conservative thresholds.
+Qualitatively, Stardist effectively segments cell nuclei, closely matching the shapes of manually annotated reference masks as can be seen from Fig.~\ref{figperfstardistqual}. Despite its generally precise segmentation, Stardist tends to slightly underestimate the number of nuclei in densely clustered areas. This observation is supported by the difference in the number of reference masks (n=1923) compared to predicted masks ($n=1823$). To quantify this performance, we matched predictions with references using the Intersection over Reference metric, allowing less penalization for predictions that segment multiple references and accommodating single predictions to multiple references. Double assignments in matching are considered false positives.
+The common threshold for mask matching in computer vision is 0.5, but this may be too conservative for small objects like cell nuclei, where minimal prediction shifts can significantly impact overlap metrics. Despite this, Stardist's performance remains robust even at conservative thresholds (cf. Fig.~\ref{figperfstardist}).
 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/quantitative_performance_stardist.png"}
-	\caption[Quantitative performance \texttt{Stardist}]{\textcolor{red}{tbd}.}
+	\caption[Quantitative performance \texttt{Stardist}]{Performance of \texttt{Stardist} in terms of the described metrics and ROC metrics.}
 	\label{figperfstardist}
 \end{figure} 
 
