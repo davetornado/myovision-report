@@ -29,7 +29,20 @@ In the myotube image set eventually used for training, it is clear that these im
 \subsubsection{Quantitative Analysis}
 Upon evaluating the images selected for training, we found that myotube images are predominantly dark. The evaluated images had average red, green, and blue values of 2.56, 9.8, and 2.9, respectively, with a high degree of variance. Further analysis into the HSL (Hue, Saturation, Lightness) space of these images confirmed their darkness, primarily attributed to the large areas of dark background present. The figure below summarizes the activations for red, green, blue, and lightness across several images.
 
-\textcolor{red}{Table missing}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+	\hline
+	& Minimum Activation & Minimum non-zero  activation & Maximum activation & Mean of mean activations & Mean of activation standard deviations \\
+	\hline
+	Red & 0 & 1.89 & 6.90 & 2.56 & 3.88 \\
+	\hline
+	Green & 0 & 1.89 & 28.34 & 9.79 & 8.13 \\
+	\hline
+	Blue & 0 & 2.84 & 17.48 & 2.90 & 2.36 \\
+	\hline
+	Lightness & 0.64 & NA & 14.23 & 5.37 & 4.75 \\
+	\hline
+\end{tabular}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/pixel_distribution_plots_rgb.png"}
@@ -42,7 +55,6 @@ Upon evaluating the images selected for training, we found that myotube images a
 	\caption[TBD]{TBD}
 	\label{fig3}
 \end{figure}
-
 
 This analysis highlights the necessity of treating myotube images differently from natural images. For instance, typical normalization techniques based on pixel activation means derived from natural images are not directly applicable to myotube images due to their unique characteristics.
 
