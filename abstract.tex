@@ -1,14 +1,9 @@
 \selectlanguage{english}
 \begin{abstract}
-	\textcolor{red}{english text}
-	\lipsum[1]
+	Myogenesis, the process of muscle tissue formation and regeneration, involves the proliferation, migration, differentiation, and fusion of so called myoblasts, which ultimately form multinucleated myotubes and mature into myofibers. To gain a better understanding of myogenesis, automated instance segmentation models are proposed to accurately quantify individual myoblasts and myotubes in microscopy images with the intention to overcome challenges such as overlapping instances and time consuming preprocessing steps, thereby enhancing analysis speed, reproducibility, and eliminating human bias. The pretrained \texttt{Stardist} model was used to segment myoblasts and Meta's \texttt{SAM} was trained to learn myotubes. In order to obtain segmentations for the training, a tool was created which utilized \texttt{SAM}'s remarkable zero-shot generalization. This way, fewer myotube masks had to be created manually. While \texttt{Stardist} displayed superb performance out of the box, the trained myotube segmentation model, dubbed \texttt{MyoSAM}, while displaying promising, did not generalize as well as \texttt{Stardist} due to a lack of training data. 
 \end{abstract}
 \selectlanguage{ngerman}
 \begin{abstract}
 	\textcolor{red}{german text}
-	\lipsum[2]
 \end{abstract}
 \selectlanguage{english}
-\textcolor{red}{To explain:
-References, newpage, include, figurecaption, Abstract, Appendix, Citing, \texttt{StarDist}, bibliography
-}
