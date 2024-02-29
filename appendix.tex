@@ -1,1 +1,27 @@
-\section{Appendix}
+\section{Appendix}\label{pcsam}
+In the following, the pseudocode to the \texttt{SAM} training loop can be found.
+\begin{algorithm}
+	\caption{SAM Training Algorithm}
+	\begin{algorithmic}[1]
+		\State Initialize ground truth mask $G$
+		\State Initialize total number of iterations $n$
+		\State Initialize logit mask $ P = \text{None}$
+		\State Initialize threshold $t$
+		\State Sample random integer $u\in \{k \in \mathbb{N}|k\leq n\}$
+		\State Uniformly sample a foreground point $p$ from $G$
+		\For{$i = 1$ to $n$}
+		\State Predict new logit mask $P$ using point $p$ and logit mask $P$
+		\If{i = u or i = n}
+		\State \textbf{continue}
+		\EndIf
+		\State Update binarized mask $M_{\text{pred}} = P > t$ 
+		\State Update error region $E = |G - M_{\text{pred}}|$
+		\State Update point $p$ by sampling uniformly from error region $E$
+		\If{$E(p)$ is false negative}
+		\State $p$ is a foreground point
+		\ElsIf{$E(p)$ is false positive}
+		\State $p$ is a background point
+		\EndIf
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
