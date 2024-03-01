@@ -24,7 +24,7 @@ Myotube and cell nuclei microscopy images significantly differ from natural imag
 	\caption[TBD]{\textcolor{red}{TBD}}
 	\label{fig1}
 \end{figure}
-In the myotube image set eventually used for training, it is clear that these images vary widely in size, brightness, and color schemes. They are primarily monochromatic, with their color depending on the marker used to make the myotubes visible and the type of microscope employed for capturing the images. Additionally, the myotubes themselves display considerable variation in size, shape, and density. This variety underscores the diverse data distribution present within myotube images as a whole.
+In the myotube image set eventually used for training, it is clear that the images vary widely in size, brightness, and color schemes. They are primarily monochromatic, with their color depending on the biomarker used and the type of microscope employed for capturing the images. Additionally, the myotubes themselves display considerable variation in size, shape, and density. This variety underscores the diverse data distribution present within myotube images as a whole.
 
 \subsubsection{Quantitative Analysis}
 Upon evaluating the images selected for training, we found that myotube images are predominantly dark. The evaluated images had average red, green, and blue values of 2.56, 9.8, and 2.9, respectively, with a high degree of variance. Further analysis into the HSL (Hue, Saturation, Lightness) space of these images confirmed their darkness, primarily attributed to the large areas of dark background present. The figure below summarizes the activations for red, green, blue, and lightness across several images.
@@ -71,13 +71,13 @@ Both foreground detection algorithms applied to Fig.~\ref{figtubeblast} can be f
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/km_blast.png"}
-	\caption[k-Means applied to myoblasts]{Foreground detection of myoblasts using k-Means}
+	\caption[k-Means applied to nuclei]{Foreground detection of myoblasts and cell nuclei using k-Means}
 	\label{figkmblast}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/otsu_blast.png"}
-	\caption[Otsu thresholding applied to myoblasts]{Foreground detection of myoblasts using Otsu thresholding}
+	\caption[Otsu thresholding applied to nuclei]{Foreground detection of myoblasts and cell nuclei using Otsu thresholding}
 	\label{figotsublast}
 \end{figure}
 \begin{figure}
@@ -120,10 +120,10 @@ Just from these theoretical discussions alone, it becomes evident that the algor
 
 \newpage
 \subsection{Ellipse Fitting}
-As a last resort for unsupervised methods, it was attempted to fit ellipses to the myoblast images. It is evident that this approach would not work for myotubes due to their oftentimes crooked shapes. But for a typical myoblast image, it does seem to be a sensible approximation. There are several methods that have attempted similar in the literature \cite{panagiotakis2020region, panagiotakis2018cell, kothari2009automated}. All of them have a common structure. The image is preprocessed, which usually consists of methods previously delineated in this section like thresholding, Gaussian filtering, edge detection but also other things like hole-filling. At this point, the typical foreground detection has been performed. At this point, methods start diverging. In some cases ellipses are fit based on the curvature of the foreground. In other cases, many ellipses are fit and the fit with the highest goodness measure like AIC is kept. In addition to that, there are some computed quantities determining whether a segment is large, small, circular, or bright enough to be a cell. All in all, the final part distinguishes touching and overlapping cells one way or another. But even with all these things considered, the segmentation quality is easily influenced by the chosen preprocessing, as can be seen in Fig.~\ref{figellipsefitting}. 
+As a last resort for unsupervised methods, it was attempted to fit ellipses to the nuclei/myoblast images. It is evident that this approach would not work for myotubes due to their oftentimes crooked shapes. But for a typical myoblast image, it does seem to be a sensible approximation. There are several methods that have attempted similar in the literature \cite{panagiotakis2020region, panagiotakis2018cell, kothari2009automated}. All of them have a common structure. The image is preprocessed, which usually consists of methods previously delineated in this section like thresholding, Gaussian filtering, edge detection but also other things like hole-filling. At this point, the typical foreground detection has been performed. At this point, methods start diverging. In some cases ellipses are fit based on the curvature of the foreground. In other cases, many ellipses are fit and the fit with the highest goodness measure like AIC is kept. In addition to that, there are some computed quantities determining whether a segment is large, small, circular, or bright enough to be a cell. All in all, the final part distinguishes touching and overlapping cells one way or another. But even with all these things considered, the segmentation quality is easily influenced by the chosen preprocessing, as can be seen in Fig.~\ref{figellipsefitting}. 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/ellipsefitting.png"}
-	\caption[Ellipse Fitting as segmentation]{Ellipse fitting for myoblasts. One additional application of a dilation operation significantly alters the outcome of the segmentation.}
+	\caption[Ellipse Fitting as segmentation]{Ellipse fitting for nuclei/myoblasts. One additional application of a dilation operation significantly alters the outcome of the segmentation.}
 	\label{figellipsefitting}
 \end{figure}
