@@ -136,3 +136,42 @@
 		\hline
 	\end{tabular}
 \end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Performance Metrics and Their Corresponding Formulas}
+	\label{tabdefs}
+	\renewcommand{\arraystretch}{2}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Performance Metric} & \textbf{Formula} \\
+		\hline
+		Precision & $Precision = \frac{TP}{TP + FP}$ \\
+		\hline
+		Recall & $Recall = \frac{TP}{TP + FN}$ \\
+		\hline
+		Accuracy & $Accuracy = \frac{TP}{TP + FP + FN}$ \\
+		\hline
+		
+		Intersection over Union (IoU) & $IoU(R,P) = \frac{|R \cap P|}{|R \cup P|}$ \\
+		\hline
+		
+		Intersection over Reference (IoR) & $IoR(R,P) = \frac{|R \cap P|}{|R|}$ \\
+		\hline
+		
+		Normalized Surface Distance (NSD) & $NSD(R,P)^{(\tau_{\text{NSD}})} = \frac{|S_R \cap B_P^{(\tau_{\text{NSD}})}| + |S_P \cap B_R^{(\tau_{\text{NSD}})}|}{|S_R| + |S_P|}$
+		\\
+		\hline
+		Panoptic Quality (PG) & PQ = $\frac{\sum_{(R, P) \in TP} IoU(R, P)}{|TP| + \frac{1}{2}|FP| + \frac{1}{2}|FN|}$ \\
+		\hline
+	\end{tabular}\\	
+\end{table}
+Explanation of variables:
+\begin{enumerate}
+	\item $R$: Reference
+	\item $P$: Prediction
+	\item $S_R$: Boundary of $R$
+	\item $B_R$: Border Regions of $R$
+	\item $S_P$: Boundary of $P$
+	\item $B_P$: Border Regions of $P$
+\end{enumerate}
