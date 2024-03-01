@@ -1,5 +1,5 @@
 \section{Segmentation using Unsupervised Methods}\label{secunsupervised}
-In the beginning, established, unsupervised methods were used to segment the images in order to gain a better understanding of the data. Unsupervised learning includes algorithms which intend to find regularities, structures, or patterns within unlabelled datasets. As they require no ground truth labelled data and are not too computationally expensive, they are a great fit for exploratory analysis. The results of two classical methods (watershed and ellipse fitting) applied to the given images are discussed in the following. For this section, one myotube-myoblast image pair in Fig.~\ref{figtubeblast} and Fig.~\ref{figoverlap} will be used to exemplify the unsupervised methods.
+In the beginning, established, unsupervised methods were used to segment the images in order to gain a better understanding of the data. Unsupervised learning includes algorithms which intend to find regularities, structures, or patterns within unlabelled datasets. As they require no ground truth labelled data and are not too computationally expensive, they are a great fit for exploratory analysis. The results of two classical methods (watershed and ellipse fitting) applied to the given images are discussed in the following. For this section, one myotube-myoblast image pair in Fig.~\ref{figtubeblast} and Fig.~\ref{figoverlap} will be used to exemplify the unsupervised methods. \texttt{OpenCV} \cite{opencv_library} was used exclusively for this entire section.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/workhorse.png"}
@@ -21,7 +21,7 @@ Myotube and cell nuclei microscopy images significantly differ from natural imag
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/myotube_image_set.png"}
-	\caption[TBD]{TBD}
+	\caption[TBD]{\textcolor{red}{TBD}}
 	\label{fig1}
 \end{figure}
 In the myotube image set eventually used for training, it is clear that these images vary widely in size, brightness, and color schemes. They are primarily monochromatic, with their color depending on the marker used to make the myotubes visible and the type of microscope employed for capturing the images. Additionally, the myotubes themselves display considerable variation in size, shape, and density. This variety underscores the diverse data distribution present within myotube images as a whole.
@@ -46,13 +46,13 @@ Upon evaluating the images selected for training, we found that myotube images a
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/pixel_distribution_plots_rgb.png"}
-	\caption[TBD]{TBD}
+	\caption[TBD]{\textcolor{red}{TBD}}
 	\label{fig2}
 \end{figure}
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{"images/pixel_distribution_plots_hsl.png"}
-	\caption[TBD]{TBD}
+	\caption[TBD]{\textcolor{red}{TBD}}
 	\label{fig3}
 \end{figure}
 \ \\

@@ -1,5 +1,7 @@
-\section{Appendix}\label{pcsam}
+\section{Appendix}
+\textcolor{red}{Add references to Figures in text}
 In the following, the pseudocode to the \texttt{SAM} training loop can be found.
+\subsection{Trainings Loop}\label{pcsam}
 \begin{algorithm}
 	\caption{SAM Training Algorithm}
 	\begin{algorithmic}[1]
@@ -25,3 +27,112 @@ In the following, the pseudocode to the \texttt{SAM} training loop can be found.
 		\EndFor
 	\end{algorithmic}
 \end{algorithm}
+\subsection{Losses and Learning Rate}\label{seclr}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/lr.png"}
+	\caption[Learning rate]{\textcolor{red}{TBD}.}
+	\label{figlr}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/train_loss.png"}
+	\caption[Train loss]{\textcolor{red}{TBD}.}
+	\label{figtrainloss}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/test_loss.png"}
+	\caption[Test loss]{\textcolor{red}{TBD}.}
+	\label{figtestloss}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{"images/train_test_loss.png"}
+	\caption[Train and Test loss]{\textcolor{red}{TBD}.}
+	\label{figtraintestloss}
+\end{figure}
+\subsection{Metrics}\label{secmetrics}
+% Table 1: Image Specific Metrics
+\begin{table}[H]
+	\centering
+	\caption{Image Specific Metrics}
+	\begin{tabular}{|l|c|}
+		\hline
+		Metric & Formula \\
+		\hline
+		Total myotubes &  \\
+		\hline
+		Total nuclei &  \\
+		\hline
+		Total myoblasts &  \\
+		\hline
+		Total nuclei inside myotubes &  \\
+		\hline
+		Total fusion index & Total Fusion Index = $\frac{\text{N Nuclei in Myotubes}}{\text{N Nuclei}}$ \\
+		\hline
+		Number of nuclei clusters &  \\
+		\hline
+		Total myotube area &  \\
+		\hline
+		Total nuclei area &  \\
+		\hline
+		Total myoblasts area &  \\
+		\hline
+		Total nuclei inside myotubes area &  \\
+		\hline
+	\end{tabular}
+\end{table}
+
+% Table 2: Myotube Specific Metrics
+\begin{table}[H]
+	\centering
+	\caption{Myotube Specific Metrics}
+	\begin{tabular}{|l|c|}
+		\hline
+		Metric & Formula \\
+		\hline
+		Predicted IoU & IoU = $\frac{\text{Area of Overlap}}{\text{Area of Union}}$ \\
+		\hline
+		Stability &  \\
+		\hline
+		Is on edge &  \\
+		\hline
+		RGB min &  \\
+		\hline
+		RGB max &  \\
+		\hline
+		RGB mean &  \\
+		\hline
+		RGB median &  \\
+		\hline
+		RGB mode &  \\
+		\hline
+		RGB standard deviation &  \\
+		\hline
+		Integrated density RGB &  \\
+		\hline
+		Area &  \\
+		\hline
+		Convex area &  \\
+		\hline
+		Solidity & Solidity = $\frac{\text{Area}}{\text{Convex Area}}$ \\
+		\hline
+		Aspect ratio &  \\
+		\hline
+		Roundness & Roundness = $\frac{4 \times \text{Area}}{\pi \times \text{Major Axis}^2}$ \\
+		\hline
+		Perimeter &  \\
+		\hline
+		Feret’s Diameter (min \& max) &  \\
+		\hline
+		Circularity & Circularity = $\frac{4 \pi \times \text{Area}}{\text{Perimeter}^2}$ \\
+		\hline
+		Instance fusion index &  \\
+		\hline
+		Centroid &  \\
+		\hline
+		Cluster information &  \\
+		\hline
+	\end{tabular}
+\end{table}

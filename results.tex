@@ -25,6 +25,35 @@ The common threshold for mask matching in computer vision is 0.5, but this may b
 	\label{figperfstardist}
 \end{figure} 
 
+\begin{table}[H]
+	\centering
+	\caption{Stardist Performance ($\tau = 0.5$)}
+	\begin{tabular}{|l|c|}
+		\hline
+		True Positives & 1801 \\
+		\hline
+		False Positives & 23 \\
+		\hline
+		False Negatives & 122 \\
+		\hline
+		Precision & 0.99 \\
+		\hline
+		Recall & 0.94 \\
+		\hline
+		Accuracy & 0.93 \\
+		\hline
+		Panoptic Quality & 0.84 \\
+		\hline
+		Mean Matching Score (IoR) & 0.87 \\
+		\hline
+		Normalised Matching Score (IoR) & 0.82 \\
+		\hline
+		Mean IoU & 0.77 \\
+		\hline
+		Normalised IoU & 0.72 \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsubsection{Performance of Myotube Segmentation with \texttt{MyoSAM}}
 
@@ -36,7 +65,37 @@ The common threshold for mask matching in computer vision is 0.5, but this may b
 \end{figure} 
 The performance comparison between \texttt{MyoSAM} and the standard \texttt{SAM} model highlights several key differences. Our focus with \texttt{MyoSAM} was on accurately delineating myotube boundaries, crucial for medical evaluations of microscopy images. To this end, we report the Normalized Surface Distance as an overlap metric for myotubes, which is a measure of overlap of the mask boundaries. NSD has an adjustable parameter tau, with which the boundaries of both masks can be widened to account for inter rater variability. We set the parameter at three, meaning the boundaries were widened by three pixels both inward and outward.
 Despite \texttt{SAM}'s capabilities, it faces challenges in accurately segmenting overlapping myotubes, often misidentifying them as separate entities or as disconnected parts of the same segment. Its design to segment a wide range of features results in the unnecessary segmentation of insignificant details, such as minor grains or shades within myotubes. Additionally, SAM sometimes generates redundant masks for a single myotube, a byproduct of its training to handle ambiguous prompts, despite there being no such ambiguity in myotube identification. This highlights the need for tailored approaches in myotube segmentation to avoid these specific issues. Our qualitative comparison in Fig.~\ref{figperfsamqual} shows \texttt{MyoSAM} significantly improves on these issues, but how do the metrics reflect this? We matched myotube references and predictions using IoU, and we recommend a 0.5 matching threshold due to the larger size of myotubes compared to nuclei. \texttt{MyoSAM} outperforms \texttt{SAM} in almost all aspects and at all except one matching threshold, except for a slight increase in the number of predicted masks, demonstrating a quality over quantity advantage. Their individual performances are seen in Fig.~\ref{figperfsam} and Fig.~\ref{figperfsambase} while the improvement due to the training measured in terms of differences in performance metrics is seen in Fig.~\ref{figperfdiffsam}.
-
+\begin{table}[H]
+	\centering
+	\caption{MyoSAM vs SAM ($\tau = 0.5$)}
+	\begin{tabular}{|l|c|c|c|}
+		\hline
+		Metric & MyoSAM & SAM & Difference \\
+		\hline
+		True Positives & 169 & 161 & 8.00 \\
+		\hline
+		False Positives & 65 & 69 & -4.00 \\
+		\hline
+		False Negatives & 43 & 51 & -8.00 \\
+		\hline
+		Precision & 0.72 & 0.7 & 0.02 \\
+		\hline
+		Recall & 0.79 & 0.76 & 0.03 \\
+		\hline
+		Accuracy & 0.61 & 0.57 & 0.04 \\
+		\hline
+		Panoptic Quality & 0.62 & 0.57 & 0.05 \\
+		\hline
+		Mean Matching Score & 0.81 & 0.78 & 0.03 \\
+		\hline
+		Normalised Matching Score & 0.65 & 0.59 & 0.06 \\
+		\hline
+		Mean NSD & 0.88 & 0.83 & 0.05 \\
+		\hline
+		Normalised NSD & 0.7 & 0.63 & 0.07 \\
+		\hline
+	\end{tabular}
+\end{table}
 \textcolor{red}{(INSERT TABLE WITH PERFORMANCE AT 0.5)}
 \begin{figure}
 	\centering
